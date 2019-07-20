@@ -1,9 +1,13 @@
+/*
+ *	Single pair shortest path algorithm
+ */
+
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
 
 map<string,int> countrymap;
-vector <pair> 
+vector<pair<int ,int>> 
 
 
 int main()
