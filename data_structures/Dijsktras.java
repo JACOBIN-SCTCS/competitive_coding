@@ -15,17 +15,24 @@ class AdjListNode
 
 
 
+
+
+
 class NodeComparator implements Comparator<AdjListNode>{
 	@Override
-	public int compare(AdjListNode node1, AdjListNode node2) {
+	public int compare(AdjListNode node1, AdjListNode node2) 
+	{
 		
 		if (node1.weight < node2.weight) 
-            return -1; 
-        if (node1.weight > node2.weight) 
-            return 1; 
-        return 0; 
+            		return -1; 
+        	if (node1.weight > node2.weight) 
+            		return 1; 
+        	return 0; 
 	}
 }
+
+
+
 
 
 
@@ -41,6 +48,7 @@ class Dijkstras
 		for(int i=0;i<distance.length;++i)
 		{
 			distance[i] = Integer.MAX_VALUE;
+			
 		}
 
 
@@ -48,7 +56,12 @@ class Dijkstras
 		PriorityQueue<AdjListNode> pq = new PriorityQueue<>(adj_list.size(),new NodeComparator());
 		AdjListNode source_node = new AdjListNode(source,0);
 		
-		
+		for(int i=0;i<distance.length;++i)
+		{
+			pq.add(new AdjListNode(i,Integer.MAX_VALUE));
+			
+		}
+
 		
 		pq.add(source_node);
 		distance[source]=0;
@@ -85,6 +98,11 @@ class Dijkstras
 
 
 
+
+
+
+	
+
 	public static List<List<AdjListNode>> createGraph()
 	{
 		List<List<AdjListNode>> adj_list = new ArrayList<List<AdjListNode>>();
@@ -119,12 +137,17 @@ class Dijkstras
 	public static void main(String args[])
 	{
 	
-		List<List<AdjListNode>> adj_list = createGraph();
+		List<List<AdjListNode>> adj_list = createGraph(); // sample graph You can  write custom I/O to get adjacency list
 		Dijkstras d = new Dijkstras();
-		int[] distances  = d.dijkstras(adj_list, 0);
+		int[] distances  = d.dijkstras(adj_list, 0);  //source vertex is taken as 0
+		
+		System.out.println("Distances from source 0");
 		for(int i=0;i<distances.length;++i)
 		{
-			System.out.print(distances[i]);
+			if(distances[i]==Integer.MAX_VALUE)
+				System.out.println("Node"+i+"--->"+"infinity");
+			else
+				System.out.println("Node"+i+"--->"+distances[i]);
 		}
 
 	}
