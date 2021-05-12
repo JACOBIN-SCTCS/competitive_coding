@@ -8,7 +8,7 @@ class CycleEdges
 
 	List<List<Integer>> createAdjList()
 	{	
-	     for(int i=0;i<6;++i)
+	     for(int i=0;i<8;++i)
 		     adj_list.add(new ArrayList<Integer>());
 	     
 	     adj_list.get(0).add(3);
@@ -23,6 +23,13 @@ class CycleEdges
 	     adj_list.get(4).add(0);
 	     adj_list.get(4).add(5);
 	     adj_list.get(5).add(4);
+	     adj_list.get(5).add(0);
+     	     adj_list.get(0).add(5);
+	     adj_list.get(1).add(6);
+	     adj_list.get(6).add(1);
+	     adj_list.get(5).add(7);
+	     adj_list.get(7).add(5);     
+
 	     return adj_list;
 	    
 	}
@@ -54,15 +61,15 @@ class CycleEdges
 	{
 		CycleEdges e = new CycleEdges();
 		List<List<Integer>> adj_list = e.createAdjList();
-		int[] dfscounter = new int[6];
-		int[] visited = new int[6];
-		boolean[] cyclePart = new boolean[6];
-		int[] parent = new int[6];
+		int[] dfscounter = new int[8];
+		int[] visited = new int[8];
+		boolean[] cyclePart = new boolean[8];
+		int[] parent = new int[8];
 		Arrays.fill(parent,-1);
 		Arrays.fill(cyclePart,false);
 		e.DFS(adj_list,0,visited,cyclePart,parent,dfscounter);
 		System.out.println("Edges part of cycle\n");
-		for(int i=0;i<6;++i)
+		for(int i=0;i<8;++i)
 		{
 			if(cyclePart[i]==true)
 			{

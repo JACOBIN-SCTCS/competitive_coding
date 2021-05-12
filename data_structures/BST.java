@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.util.LinkedList;
 class Node
 {
 	int data;
@@ -22,7 +22,6 @@ class BST
 	 {
 		return deleteNode(root,data);
 	 }
-	
 	 public static int InOrderSuccessor(Node root)
 	 {
 		 Node tmp=root.right;
@@ -72,6 +71,40 @@ class BST
 		return root;
 	 }
 
+	 public static Node insertRecursive(Node root, int data)
+	 {
+		 if(root==null)
+		 	return new Node(data);
+		
+		 if(root.data<data && root.right==null)
+		{
+			if(root.right==null)
+			{
+				root.right = new Node(data);
+			
+			}
+			else
+			{
+				root.right = insertRecursive(root.right, data);
+			}
+		}
+		else if(root.data>data )
+		{
+			if(root.left==null)
+			{
+				root.left = new Node(data);
+				
+			}
+			else
+			{
+				root.left = insertRecursive(root.left, data);
+			
+			}
+
+		}
+		return root;
+			
+	 }
 
 	 public static Node insert(Node root,int data) 
 	 {
@@ -81,7 +114,7 @@ class BST
         
         	if(root==null)
             		return newnode;
-        
+					  
         	Node tmp;
         	ptr=root;
         	tmp=ptr;
@@ -165,14 +198,22 @@ class BST
 	public static void main(String args[])
 	{
 		Node root=null;
-		root=insert(root,4);
-		root=insert(root,2);
-		root=insert(root,18);
-		root=insert(root,12);
+		//root=insert(root,4);
+		//root=insert(root,2);
+		//root=insert(root,18);
+		//root=insert(root,12);
+		root=insertRecursive(root,4);
+		root=insertRecursive(root,2);
+		root=insertRecursive(root,18);
+		root=insertRecursive(root,12);
+		root=insertRecursive(root,11);
+		root=insertRecursive(root,20);
 		//int succ=InOrderSuccessor(root);
 		//System.out.print(succ);
-		root=delete(root,18);
+		//root=delete(root,18);
 		InOrder(root);
+	
+		
 	}
 }
 
