@@ -1,52 +1,35 @@
 class Solution {
-    public String customSortString(String S, String T) 
-    {
+    public String customSortString(String order, String str) {
         
-        HashMap<Character,Integer> map = new HashMap<>();
-        for(int i=0;i<T.length();++i)
+        int[] count = new int[26];
+        for(int i=0;i<str.length();++i)
         {
-            if(map.containsKey(T.charAt(i)))
-                map.put(T.charAt(i),map.get(T.charAt(i))+1);
-            else
-            {
-                map.put(T.charAt(i),1);
-            }
+            count[str.charAt(i)-'a'] +=1;
         }
-    
-        boolean[] charpresent = new boolean[26];
-        Arrays.fill(charpresent,false);
-        
-        StringBuilder s = new StringBuilder();
-        for(int i=0;i<S.length();++i)
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<order.length();++i)
         {
-            charpresent[S.charAt(i)-'a']=true;
-            if(map.containsKey(S.charAt(i)))
+            if(count[order.charAt(i)-'a'] >0)
             {
-                int count=map.get(S.charAt(i));
-                while(count>0)
+                while(count[order.charAt(i)-'a'] >0)
                 {
-                    s.append(S.charAt(i));
-                    count-=1;
+                    sb.append(order.charAt(i));
+                    count[order.charAt(i)-'a']-=1;
                 }
             }
         }
-        
-        for(char character : map.keySet())
+        for(int i=0;i<26;++i)
         {
-            if(!charpresent[character-'a'])
+            char current = (char)('a' + i);
+            if(count[i]>0)
             {
-                int count = map.get(character);
-                while(count>0)
+                while(count[i]>0)
                 {
-                    s.append(character);
-                    count-=1;
+                    sb.append(current);
+                    count[i]-=1;
                 }
             }
         }
-        
-        return s.toString();
-        
-        
-        
+        return sb.toString();
     }
 }
